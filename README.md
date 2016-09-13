@@ -8,8 +8,7 @@ A simple package that brings the cascading configuration system back into Larave
 
 ## Requirements
 
-* Laravel 5, or
-* Lumen >=5.1
+* Laravel 5
 
 ## Features
 * Laravel-4 style cascading config (can't believe I'm writing this)
@@ -17,11 +16,11 @@ A simple package that brings the cascading configuration system back into Larave
 
 ## Installation
 
-First, require `phanan/cascading-config` into your `composer.json` and run `composer update`:
+First, require `bryceray1121/cascading-config` into your `composer.json` and run `composer update`:
 
 ```
     "require": {
-        "phanan/cascading-config": "~2.0"
+        "bryceray1121/cascading-config": "dev-master"
     },
 ```
 
@@ -54,48 +53,21 @@ Fill the configuration into your environment-based config directory (`config.loc
 
 ### For Laravel
 
-1. Add the package's service provider class into `config/app.php`:
+1. Add the package's bootstrap class into `Http/Kernel.php` replacing LoggerConfiguration:
 
     ``` php
     'providers' => [
-        /*
-         * ...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-
-        PhanAn\CascadingConfig\CascadingConfigServiceProvider::class,
+    protected $bootstrappers = [
+        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
+        'bryceray1121\CascadingConfig\CascadingConfigServiceProvider',
+        'Illuminate\Foundation\Bootstrap\ConfigureLogging',
+        'Illuminate\Foundation\Bootstrap\HandleExceptions',
+        'Illuminate\Foundation\Bootstrap\RegisterFacades',
+        'Illuminate\Foundation\Bootstrap\RegisterProviders',
+        'Illuminate\Foundation\Bootstrap\BootProviders',
+    ];
     ],
     ```
-    
-1.  Call `config($key)`
-
-### For Lumen
-
-1. Register the service provider class in `bootstrap/app.php`:
-
-    ```php
-    // $app->register(App\Providers\AppServiceProvider::class);
-    // $app->register(App\Providers\EventServiceProvider::class);
-    $app->register(PhanAn\CascadingConfig\CascadingConfigServiceProvider::class);
-    ```
-
-1. Enable multi-environment support by uncommenting this line:
-
-    ```php
-    Dotenv::load(__DIR__.'/../');
-    ```
-
-1. Manually register the configuration arrays:
-
-    ```php
-    $app->configure('auth');
-    $app->configure('cache');
-    $app->configure('mail');
-    ```
-
-1. Call `config($key)`
 
 ## Notes
 

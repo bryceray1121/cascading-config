@@ -1,5 +1,5 @@
 {
-  "name": "phanan/cascading-config",
+  "name": "bryceray1121/cascading-config",
   "description": "Bringing the cascading configuration system back to Laravel 5.",
   "keywords": [
     "laravel",
@@ -16,6 +16,9 @@
       "name": "Phan An",
       "email": "me@phanan.net",
       "homepage": "http://phanan.net"
+    },
+    {
+      "name": "Bryce Ray"
     }
   ],
   "require": {
@@ -27,7 +30,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PhanAn\\CascadingConfig\\": "src"
+      "bryceray1121\\CascadingConfig\\": "src"
     }
   }
 }
